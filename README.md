@@ -514,11 +514,7 @@ Contributions to ChangeGuard are welcome. To propose changes:
 
 ---
 
-## License
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for the full text.
-
----
 
 <div align="center">
   <sub>ChangeGuard — Pre-Deployment Software Change Impact Analysis</sub>
