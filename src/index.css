@@ -1,0 +1,112 @@
+@import "tailwindcss";
+@import '@xyflow/react/dist/style.css';
+
+@theme {
+  --color-background: hsl(260 20% 4%);
+  --color-foreground: hsl(260 10% 90%);
+  
+  --color-card: hsl(260 20% 6%);
+  --color-card-foreground: hsl(260 10% 90%);
+
+  --color-primary: hsl(270 90% 60%);
+  --color-primary-foreground: hsl(0 0% 100%);
+
+  --color-secondary: hsl(260 20% 12%);
+  --color-secondary-foreground: hsl(260 10% 90%);
+
+  --color-muted: hsl(260 20% 15%);
+  --color-muted-foreground: hsl(260 10% 60%);
+
+  --color-accent: hsl(270 90% 60%);
+  --color-accent-foreground: hsl(0 0% 100%);
+
+  --color-destructive: hsl(0 70% 50%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+
+  --color-border: hsl(260 20% 15%);
+  --color-input: hsl(260 20% 15%);
+  --color-ring: hsl(270 90% 60%);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  }
+  
+  .glass-panel {
+    @apply bg-card/40 backdrop-blur-md border border-border;
+  }
+
+  .glow-border {
+    position: relative;
+  }
+  .glow-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(to bottom right, rgba(168, 85, 247, 0.5), rgba(168, 85, 247, 0.1), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  }
+
+  /* Logo Micro-Animations */
+  @keyframes logoLoad {
+    0% {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes logoIdleGlow {
+    0%, 100% {
+      box-shadow: 0 0 8px rgba(168, 85, 247, 0.15);
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 14px rgba(168, 85, 247, 0.35);
+      border-color: rgba(168, 85, 247, 0.65);
+    }
+  }
+
+  .animate-logo-load {
+    animation: logoLoad 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-logo-idle {
+    animation: logoIdleGlow 4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-logo-load {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .animate-logo-idle {
+      animation: none;
+    }
+  }
+}
